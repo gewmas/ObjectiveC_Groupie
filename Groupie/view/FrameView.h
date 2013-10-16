@@ -16,9 +16,10 @@
 @property (nonatomic) NSInteger capacity;
 @property (nonatomic) NSInteger size;
 @property (nonatomic) NSMutableArray *chess;
+@property (nonatomic) UILabel *capacityLabel;
 
 
-- (id)initWithFrameCapacity:(CGRect)frame andCapacity:(int)capacity;
+- (id)initWithFrameCapacity:(CGRect)frame andCapacity:(NSInteger)capacity;
 - (void)drawBoarder;
 
 @end

@@ -67,7 +67,7 @@
 {
     UIActionSheet* action = [[UIActionSheet alloc] initWithTitle:@"Play with # bored friends:"
                                                         delegate:(id)self
-                                               cancelButtonTitle:@"Oh! Don't touch me!"
+                                               cancelButtonTitle:nil
                                           destructiveButtonTitle:nil
                                                otherButtonTitles:@"1 guy", @"2  dudes" , @"3 for triangle", @"4 in a group", nil];
     [action showInView:self.view];
@@ -83,7 +83,7 @@
     }
     
     //2 map index 0 to level 1, etc...
-    int playerNum = buttonIndex+1;
+    int playerNum = (int)buttonIndex+1;
     
     //3 load the level, fire up the game
     

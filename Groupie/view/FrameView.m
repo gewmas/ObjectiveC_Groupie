@@ -10,7 +10,7 @@
 
 @implementation FrameView
 
-- (id)initWithFrameCapacity:(CGRect)frame andCapacity:(int)capacity
+- (id)initWithFrameCapacity:(CGRect)frame andCapacity:(NSInteger)capacity
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -18,6 +18,7 @@
         _capacity = capacity;
         _size = 0;
         _chess = [[NSMutableArray alloc] init];
+        _capacityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     }
     return self;
 }

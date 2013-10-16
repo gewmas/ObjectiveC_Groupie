@@ -20,6 +20,8 @@
 //Chess size
 #define chessSize 30
 
+#define FRAME_SIZE 80
+
 //typedef NS_ENUM(NSInteger, Team) {
 //    RED,
 //    YELLOW,
@@ -35,6 +37,7 @@
 
 #define margin 4
 
-#define FRAME_SIZE 40
+
+
 
 #endif
