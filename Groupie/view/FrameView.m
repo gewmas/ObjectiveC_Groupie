@@ -17,6 +17,7 @@
         // Initialization code
         _capacity = capacity;
         _size = 0;
+        _chess = [[NSMutableArray alloc] init];
     }
     return self;
 }

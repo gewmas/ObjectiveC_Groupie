@@ -15,6 +15,7 @@
 
 @property (nonatomic) NSInteger capacity;
 @property (nonatomic) NSInteger size;
+@property (nonatomic) NSMutableArray *chess;
 
 
 - (id)initWithFrameCapacity:(CGRect)frame andCapacity:(int)capacity;

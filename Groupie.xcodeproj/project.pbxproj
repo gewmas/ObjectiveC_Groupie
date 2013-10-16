@@ -25,6 +25,10 @@
 		4C344B25180B940C006900F0 /* black.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C344B20180B940C006900F0 /* black.png */; };
 		4C344B28180B95FB006900F0 /* ipadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C344B26180B95FB006900F0 /* ipadIcon.png */; };
 		4C344B29180B95FB006900F0 /* iphoneIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C344B27180B95FB006900F0 /* iphoneIcon.png */; };
+		4C344B41180E52C9006900F0 /* ChessContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C344B40180E52C9006900F0 /* ChessContainerView.m */; };
+		4CD9003E180E665B003E6413 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9003B180E665B003E6413 /* Default-568h@2x.png */; };
+		4CD9003F180E665B003E6413 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9003C180E665B003E6413 /* Default.png */; };
+		4CD90040180E665B003E6413 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9003D180E665B003E6413 /* Default@2x.png */; };
 		4CE67B2D180B1CBE0094926E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE67B2C180B1CBE0094926E /* Foundation.framework */; };
 		4CE67B2F180B1CBE0094926E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE67B2E180B1CBE0094926E /* CoreGraphics.framework */; };
 		4CE67B31180B1CBE0094926E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE67B30180B1CBE0094926E /* UIKit.framework */; };
@@ -74,6 +78,11 @@
 		4C344B20180B940C006900F0 /* black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = black.png; path = asset/image/black.png; sourceTree = "<group>"; };
 		4C344B26180B95FB006900F0 /* ipadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ipadIcon.png; path = asset/icon/ipadIcon.png; sourceTree = "<group>"; };
 		4C344B27180B95FB006900F0 /* iphoneIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iphoneIcon.png; path = asset/icon/iphoneIcon.png; sourceTree = "<group>"; };
+		4C344B3F180E52C9006900F0 /* ChessContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChessContainerView.h; path = view/ChessContainerView.h; sourceTree = "<group>"; };
+		4C344B40180E52C9006900F0 /* ChessContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChessContainerView.m; path = view/ChessContainerView.m; sourceTree = "<group>"; };
+		4CD9003B180E665B003E6413 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		4CD9003C180E665B003E6413 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		4CD9003D180E665B003E6413 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4CE67B29180B1CBE0094926E /* Groupie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groupie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE67B2C180B1CBE0094926E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CE67B2E180B1CBE0094926E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,6 +163,9 @@
 		4C344B1B180B93F4006900F0 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				4CD9003B180E665B003E6413 /* Default-568h@2x.png */,
+				4CD9003C180E665B003E6413 /* Default.png */,
+				4CD9003D180E665B003E6413 /* Default@2x.png */,
 				4C344B26180B95FB006900F0 /* ipadIcon.png */,
 				4C344B27180B95FB006900F0 /* iphoneIcon.png */,
 				4C344B1C180B940C006900F0 /* red.png */,
@@ -200,9 +212,9 @@
 			children = (
 				4CE67B6D180B22850094926E /* config.h */,
 				4C344AF2180B2B7D006900F0 /* asset */,
-				4CE67B64180B206F0094926E /* controller */,
-				4CE67B5D180B1F1A0094926E /* view */,
 				4CE67B5C180B1F150094926E /* model */,
+				4CE67B5D180B1F1A0094926E /* view */,
+				4CE67B64180B206F0094926E /* controller */,
 				4CE67B68180B20C90094926E /* GroupieControllerViewController.h */,
 				4CE67B69180B20C90094926E /* GroupieControllerViewController.m */,
 				4C344B19180B9102006900F0 /* iPhoneStoryboard.storyboard */,
@@ -255,6 +267,8 @@
 		4CE67B5D180B1F1A0094926E /* view */ = {
 			isa = PBXGroup;
 			children = (
+				4C344B3F180E52C9006900F0 /* ChessContainerView.h */,
+				4C344B40180E52C9006900F0 /* ChessContainerView.m */,
 				4CE67B61180B1FC80094926E /* ChessView.h */,
 				4CE67B62180B1FC80094926E /* ChessView.m */,
 				4C344AF5180B3305006900F0 /* FrameView.h */,
@@ -359,12 +373,15 @@
 				4CE67B37180B1CBE0094926E /* InfoPlist.strings in Resources */,
 				4C344B21180B940C006900F0 /* red.png in Resources */,
 				4C344B18180B9097006900F0 /* iPadStoryboard.storyboard in Resources */,
+				4CD9003F180E665B003E6413 /* Default.png in Resources */,
 				4C344B23180B940C006900F0 /* purple.png in Resources */,
 				4C344B29180B95FB006900F0 /* iphoneIcon.png in Resources */,
 				4C344B15180B8F3D006900F0 /* player3.plist in Resources */,
 				4C344B14180B8F3D006900F0 /* player2.plist in Resources */,
+				4CD90040180E665B003E6413 /* Default@2x.png in Resources */,
 				4C344B24180B940C006900F0 /* green.png in Resources */,
 				4C344B10180B8E89006900F0 /* player1.plist in Resources */,
+				4CD9003E180E665B003E6413 /* Default-568h@2x.png in Resources */,
 				4C344B22180B940C006900F0 /* yellow.png in Resources */,
 				4C344B16180B8F3D006900F0 /* player4.plist in Resources */,
 			);
@@ -386,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C344B0A180B8750006900F0 /* HUDView.m in Sources */,
+				4C344B41180E52C9006900F0 /* ChessContainerView.m in Sources */,
 				4C344AF7180B3305006900F0 /* FrameView.m in Sources */,
 				4CE67B63180B1FC80094926E /* ChessView.m in Sources */,
 				4C344B0D180B8DE5006900F0 /* Level.m in Sources */,

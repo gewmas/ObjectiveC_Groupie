@@ -19,8 +19,10 @@ typedef void (^CallbackBlock)();
 }
 
 @property (weak, nonatomic) UIView* gameView;
-@property (strong, nonatomic) Level* level;
+//@property (strong, nonatomic) Level* level;
 @property (weak, nonatomic) HUDView* hud;
+
+@property (nonatomic) NSUInteger playerNumber;
 
 @property (strong, nonatomic) CallbackBlock onGameFinish;
 

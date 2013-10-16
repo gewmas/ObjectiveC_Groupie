@@ -14,7 +14,7 @@
     CGAffineTransform _tempTransform;
 }
 
-- (id)initWithTeam : (NSString*)team andSideLength:(float)sideLength
+- (id)initWithTeam : (NSString*)team andId:(int)i andSideLength:(float)sideLength
 {
     //the tile background
     NSString *s = [[NSString alloc] initWithFormat:@"%@.png", team];
@@ -25,6 +25,9 @@
     self = [super initWithImage:img];
 
     if (self != nil) {
+        
+        self.team = team;
+        self.id = i;
         
         //resize the tile
         float scale = sideLength/img.size.width;

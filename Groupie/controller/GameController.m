@@ -6,23 +6,40 @@
 //  Copyright (c) 2013 Yuhua Mai. All rights reserved.
 //
 
+#import "config.h"
+
 #import "GameController.h"
+#import "ChessContainerView.h"
 #import "ChessView.h"
 #import "FrameView.h"
 #import "config.h"
 
-#define FRAME_SIZE 40
-
 @implementation GameController
 {
-    NSMutableArray* _chess;
+    //chess view
+    NSMutableArray* _chess1;
+    NSMutableArray* _chess2;
+    NSMutableArray* _chess3;
+    NSMutableArray* _chess4;
+    
+    UILabel *redLabel;
+    UILabel *yellowLabel;
+    UILabel *purpleLabel;
+    UILabel *greenLabel;
+    
+    //frame view
     NSMutableArray* _frame;
+    
     NSInteger frameCapacity;
+    
+//    ChessContainerView * _chessContainerView;
     
     //stopwatch variables
     int _secondsLeft;
     NSTimer* _timer;
 }
+
+#pragma init
 
 - (id)init
 {
@@ -33,14 +50,57 @@
     return self;
 }
 
-- (void)createChessByTeam : (NSString*)Team andNumber: (NSInteger)n andTeamPoistion:(NSInteger)p
+- (void)createChessByTeam : (NSString*)team
+                 andNumber: (NSInteger)n
+                  andChess:(NSMutableArray*)chess
 {
+    //lazy init
+    if (chess == nil) {
+        chess = [[NSMutableArray alloc] init];
+    }
+    
+    NSInteger teamPos = 0;
+    if ([team  isEqual: @"red"]) {
+        teamPos = redTeamPos;
+        if (redLabel == nil) {
+            redLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, teamPos-chessSize/2, 80, 50)];
+            redLabel.text = @"Red Left:";
+            [redLabel sizeToFit];
+            [self.gameView addSubview:redLabel];
+        }
+    }else if ([team  isEqual: @"yellow"]) {
+        teamPos = yellowTeamPos;
+        if (yellowLabel == nil) {
+            yellowLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, teamPos-chessSize/2, 80, 50)];
+            yellowLabel.text = @"Yellow Left:";
+            [yellowLabel sizeToFit];
+            [self.gameView addSubview:yellowLabel];
+        }
+    }else if ([team  isEqual: @"purple"]) {
+        teamPos = purpleTeamPos;
+        if (purpleLabel == nil) {
+            purpleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, teamPos-chessSize/2, 80, 50)];
+            purpleLabel.text = @"Purple Left:";
+            [purpleLabel sizeToFit];
+            [self.gameView addSubview:purpleLabel];
+        }
+    }else if ([team  isEqual: @"green"]) {
+        teamPos = greenTeamPos;
+        if (greenLabel == nil) {
+            greenLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, teamPos-chessSize/2, 80, 50)];
+            greenLabel.text = @"Green Left:";
+            [greenLabel sizeToFit];
+            [self.gameView addSubview:greenLabel];
+        }
+    }
+
+    
     for (int i = 0; i < n; i++) {
-        ChessView* target = [[ChessView alloc] initWithTeam:Team andSideLength:30.0];
-        target.center = CGPointMake(50+i*50, p);
+        ChessView* target = [[ChessView alloc] initWithTeam:team andId:i andSideLength:30.0];
+        target.center = CGPointMake(margin*chessSize+chess.count*chessSize, teamPos);
         target.dragDelegate = self;
         [self.gameView addSubview:target];
-        [_chess addObject:target];
+        [chess addObject:target];
     }
 }
 
@@ -54,23 +114,53 @@
 
 - (void)newGame
 {
-    _chess = [[NSMutableArray alloc] init];
     _frame = [[NSMutableArray alloc] init];
     frameCapacity = 3;
     
-    [self createChessByTeam:@"red" andNumber:3 andTeamPoistion:50];
-    [self createChessByTeam:@"yellow" andNumber:3 andTeamPoistion:90];
-    [self createChessByTeam:@"purple" andNumber:3 andTeamPoistion:130];
-    [self createChessByTeam:@"green" andNumber:3 andTeamPoistion:170];
     
-    
+    //create player(s)
+    assert(self.playerNumber >= 1 && self.playerNumber <=4);
+    if (self.playerNumber == 1) {
+        [self createChessByTeam:@"red" andNumber:5 andChess:_chess1];
+    }else if(self.playerNumber == 2){
+        [self createChessByTeam:@"red" andNumber:5 andChess:_chess1];
+        [self createChessByTeam:@"yellow" andNumber:3 andChess:_chess2];
+    }
+    else if(self.playerNumber == 3){
+        [self createChessByTeam:@"red" andNumber:5 andChess:_chess1];
+        [self createChessByTeam:@"yellow" andNumber:3 andChess:_chess2];
+        [self createChessByTeam:@"purple" andNumber:4 andChess:_chess3];
+    }else if(self.playerNumber == 4){
+        [self createChessByTeam:@"red" andNumber:5 andChess:_chess1];
+        [self createChessByTeam:@"yellow" andNumber:3 andChess:_chess2];
+        [self createChessByTeam:@"purple" andNumber:4 andChess:_chess3];
+        [self createChessByTeam:@"green" andNumber:5 andChess:_chess4];
+    }
+
+    //create container
     [self createFrame:50 andY:200 andCapacity:frameCapacity];
     [self createFrame:150 andY:200 andCapacity:frameCapacity];
     [self createFrame:50 andY:300 andCapacity:frameCapacity];
     [self createFrame:150 andY:300 andCapacity:frameCapacity];
     
+//    [self.gameView bringSubviewToFront:_chessContainerView];
+    
     [self startStopwatch];
 }
+
+#pragma game logic
+
+- (void) nextRound
+{
+    
+}
+
+- (void) checkGameEnd
+{
+    
+}
+
+#pragma move chess
 
 -(void)chessView:(ChessView*)chessView didDragToPoint:(CGPoint)pt
 {
@@ -87,7 +177,21 @@
     if (inFrame != nil) {
         [self placeTile:chessView atFrame:inFrame];
     }else{ //fail, restore original position
-        chessView.center = CGPointMake(150, 150);
+        NSInteger teamPos = 0;
+        
+        if ([chessView.team isEqual: @"red"]) {
+            teamPos = redTeamPos;
+        }else if ([chessView.team isEqual: @"yellow"]) {
+            teamPos = yellowTeamPos;
+        }else if ([chessView.team isEqual: @"purple"]) {
+            teamPos = purpleTeamPos;
+        }else if ([chessView.team isEqual: @"green"]) {
+            teamPos = greenTeamPos;
+        }
+        
+        chessView.center = CGPointMake(margin*chessSize+(chessView.id)*chessSize, teamPos);
+        chessView.transform = CGAffineTransformIdentity;
+      
     }
     
 }
@@ -103,10 +207,26 @@
                           delay:0.00
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
+                    
                          float x = frameView.center.x +rand()%FRAME_SIZE - rand()%FRAME_SIZE;
                          float y = frameView.center.y +rand()%FRAME_SIZE - rand()%FRAME_SIZE;
                          chessView.center = CGPointMake(x, y);
                          chessView.transform = CGAffineTransformIdentity;
+                         
+                         //remove from current array
+                         if ([chessView.team isEqual: @"red"]) {
+                             [_chess1 removeObject:chessView];
+                         }else if ([chessView.team isEqual: @"yellow"]) {
+                             [_chess2 removeObject:chessView];
+                         }else if ([chessView.team isEqual: @"purple"]) {
+                             [_chess3 removeObject:chessView];
+                         }else if ([chessView.team isEqual: @"green"]) {
+                             [_chess4 removeObject:chessView];
+                         }
+                         
+                         //add to frame array
+                         [frameView.chess addObject:chessView];
+                        
                      }
                      completion:^(BOOL finished){
 //                         frameView.hidden = YES;
@@ -117,11 +237,26 @@
 //    [tileView.superview sendSubviewToBack:explode];
 }
 
+
+- (void)activeAllChess
+{
+    for(ChessView *chess in _chess1){
+        chess.userInteractionEnabled = YES;
+    }
+}
+
+- (void)deactiveAllChess
+{
+    for(ChessView *chess in _chess1){
+        chess.userInteractionEnabled = NO;
+    }
+}
+
 #pragma StopWatch
 -(void)startStopwatch
 {
     //initialize the timer HUD
-    _secondsLeft = 30;
+    _secondsLeft = 10;
     [self.hud.stopwatch setSeconds:_secondsLeft];
     
     //schedule a new timer
@@ -137,6 +272,8 @@
 {
     [_timer invalidate];
     _timer = nil;
+    
+    [self deactiveAllChess];
 }
 
 //stopwatch on tick

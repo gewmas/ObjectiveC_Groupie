@@ -18,10 +18,12 @@
 
 @interface ChessView : UIImageView
 
-@property (strong, nonatomic, readonly) NSString* team;
+@property (strong, nonatomic) NSString* team;
+@property (nonatomic) int id;
+
 @property (assign, nonatomic) BOOL isAvailable;
 @property (weak, nonatomic) id<ChessDragDelegateProtocol> dragDelegate;
 
-- (id)initWithTeam : (NSString*)team andSideLength:(float)length;
+- (id)initWithTeam : (NSString*)team andId:(int)i andSideLength:(float)sideLength;
 
 @end

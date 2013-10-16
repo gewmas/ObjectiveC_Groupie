@@ -44,12 +44,14 @@
     self.controller.hud = hudView;
     
     [self.view bringSubviewToFront:gameLayer];
-    [self.controller newGame];
+    
     
     __weak GroupieControllerViewController* weakSelf = self;
     self.controller.onGameFinish = ^(){
         [weakSelf showLevelMenu];
     };
+    
+    
 }
 
 //show tha game menu on app start
@@ -64,7 +66,7 @@
 -(void)showLevelMenu
 {
     UIActionSheet* action = [[UIActionSheet alloc] initWithTitle:@"Play with # bored friends:"
-                                                        delegate:self
+                                                        delegate:(id)self
                                                cancelButtonTitle:@"Oh! Don't touch me!"
                                           destructiveButtonTitle:nil
                                                otherButtonTitles:@"1 guy", @"2  dudes" , @"3 for triangle", @"4 in a group", nil];
@@ -81,12 +83,14 @@
     }
     
     //2 map index 0 to level 1, etc...
-    int levelNum = buttonIndex+1;
+    int playerNum = buttonIndex+1;
     
     //3 load the level, fire up the game
     
-    self.controller.level = [Level levelWithPlayerNum:levelNum];
+    self.controller.playerNumber = playerNum;
+//    self.controller.level = [Level levelWithPlayerNum:levelNum];
 //    [self.controller dealRandomAnagram];
+    [self.controller newGame];
 }
 
 - (void)didReceiveMemoryWarning
